@@ -1,18 +1,9 @@
-/*
-Hei og takk for mail
-
-Beklager sient svar. Dere må bare "purre på meg" i discord når jeg er treig. 
-
-Syns det dere beskriver over ser veldig fint ut. Når det gjelder spørsmålet deres så tenker jeg de godt kan ha blomster navn som dere foreslår eller tall eller noe så lenge de er anonyme. 
-Evt at de kan lage brukernavn. Det er ikke så viktig for meg så lenge de er anonyme. Tenker de er viktigst da få har lyst å f.eks få navnet sitt registret der med at de har fått den eller den sykdommen. 
-
-Mvh Anita
-*/
 
 const model = {
     //State
-    app: {
+    //app
         loginState: {
+            currentuserId:1,
             username: '',
             loggedIn: false,
             withoutAccount: false,
@@ -26,15 +17,15 @@ const model = {
             mapPinLatitude: 0,
         },
         navigationState: {
-            currentPage: '',
+            currentPage: 'mappage',
         },
-    },
+    //},
     //Input
     input: {
         //TODO: maybe add in email too
         loginInput: {
-            userName: '',
-            passWord: '',
+            userName: 'Person1',
+            passWord: 'abc',
             continueButton: false,
             loginButton: false,
             registerButton: false
@@ -54,15 +45,17 @@ const model = {
         },
 
         navigationInput: {
-            navigatrTo: '',
+            navigateTo: '',
         },
     },
 
     //Data / Database
-    data: {
-        users: {
-            bruker1: {
-                password: '',
+    
+        users: [
+            {
+                id:1,
+                username:"person1",
+                password: 'abc',
                 userInfo: {
                     seenTick: false,
                     bitten: false,
@@ -72,37 +65,39 @@ const model = {
                 },
             },
 
-            bruker2: {
-                password: '',
+            {
+                id:2,
+                username:"person2",
+                password: '123',
                 userInfo: {
-                    seenTick: false,
-                    bitten: false,
+                    seenTick: true,
+                    bitten: true,
                     sick: false,
                     //TODO: peoples history will remain anonymous, there will be a function in controller that just loops over every history
                     history: [2]
                 },
             },
-        },
+        ],
 
         cases: [
             {
-                date: new Date,
+                date: "22.08.22",
                 duration: 0,
-                symtoms: '',
+                symtoms: 'Ble syk',
             },
             {
-                date: new Date,
+                date: "12.05.22",
                 duration: 0,
-                symtoms: '',
+                symtoms: 'Kløe, feber',
             },
             {
-                date: new Date,
+                date: "01.01.22",
                 duration: 0,
-                symtoms: '',
+                symtoms: 'Smerter i heile kroppen',
             },
         ],
 
-        pages: {
+/*         pages: {
             loginPage: {
                 url: '',
             },
@@ -120,8 +115,8 @@ const model = {
             infoPage: {
                 url: '',
             },
-        },
-        tickInfo: '',
-    }
+        }, */
+        tickInfo: 'Lorem ipsum and stuff',
+    
 
 }
