@@ -4,13 +4,14 @@
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 
     <link rel="stylesheet" type="text/css" href="style.css" />
-    <script type="module" src="JS/mapView.js"></script>
+    <script type="module" src="JS/googleMaps.js"></script>
     <script src="forGoogleMaps.js"></script>
+    <script src="JS/mapView.js"></script>
   </head>
   <body>
     <!--The div element for the map -->
     <div id="map"></div>
-
+    <div id="app"></div>
     <!-- 
      The `defer` attribute causes the callback to execute after the full HTML
      document has been parsed. For non-blocking uses, avoiding race conditions,
@@ -18,7 +19,7 @@
      with https://www.npmjs.com/package/@googlemaps/js-api-loader.
     -->
     <script
-      src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap&v=weekly"
+      src="https://maps.googleapis.com/maps/api/js?key=&libraries=places&callback=initMap&v=weekly"
       defer
     ></script>
   </body>
