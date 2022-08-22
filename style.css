@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 /* Set the size of the div element that contains the map */
-#app {
+#map {
     height: 400px;
     /* The height is 400 pixels */
     width: 100%;
