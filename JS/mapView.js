@@ -1,12 +1,12 @@
-window.onload = function () {
+window.onload = function() {
     view();
 }
 
-function view(){
+function view() {
     let app = document.getElementById("app");
-    let html = /*HTML*/``;
+    let html = /*HTML*/ ``;
 
-    html += /*HTML*/`
+    html += /*HTML*/ `
         <input type="text" />
     `;
     console.log("laster");
