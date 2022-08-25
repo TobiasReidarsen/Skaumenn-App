@@ -1,20 +1,21 @@
 // Initialize and add the map
 
-let map;
-let request;
-let service;
+let map = null;
+let request = null;
+let service = null;
+let marker = null;
 
 function initMap() {
     // Create a map centered in Pyrmont, Sydney (Australia).
     map = new google.maps.Map(document.getElementById('map'), {
-        center: { lat: -33.8666, lng: 151.1958 },
-        zoom: 15
+        center: { lat: 42.89555 , lng: 31.97508 },
+        zoom: 7
     });
 
     request = {
         location: map.getCenter(),
         radius: '500',
-        query: 'Oslo'
+        query: 'Chad'
     }
     service = new google.maps.places.PlacesService(map);
     service.textSearch(request, callback);
@@ -26,25 +27,38 @@ function callback(results, status) {
 
 
     if (status == google.maps.places.PlacesServiceStatus.OK) {
-        var marker = new google.maps.Marker({
+        setMarker(results);
+        setMarkerLocation();
+    }
+}
+
+function setMarker(results){
+    if(results != null){
+        marker = new google.maps.Marker({
             map: map,
             place: {
                 placeId: results[0].place_id,
                 location: results[0].geometry.location
             }
         });
-
-        setMarkerLocation(marker);
-        setMapLocation(results);
     }
+    setMapLocation();
 }
 
-function setMarkerLocation(marker) {
+function setMarkerLocation() {
     marker.setMap(map);
 }
 
-function setMapLocation(results) {
-    map.setCenter(results[0].geometry.location);
+function newSetMarkerLocation(){
+    marker.setMap(null);
+}
+
+function setMapLocation() {
+    map.setCenter(marker.place.location);
+}
+
+function clearMarkers(){
+    newSetMarkerLocation();
 }
 
 function setRequest(locationParam, radiusParam, queryParam) {
@@ -56,6 +70,7 @@ function setRequest(locationParam, radiusParam, queryParam) {
 }
 
 function placeSearch() {
+    clearMarkers();
     service.textSearch(request, callback);
 }
 
