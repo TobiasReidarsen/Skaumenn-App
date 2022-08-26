@@ -9,6 +9,7 @@ const model = {
         register: false
     },
     mapState: {
+        searchHistory: [],
         currentSearch: '',
         prevSeach: '',
         mapPin: false,

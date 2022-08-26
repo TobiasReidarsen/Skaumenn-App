@@ -4,19 +4,36 @@ let map = null;
 let request = null;
 let service = null;
 let marker = null;
+let latLng = null;
 
 function initMap() {
     // Create a map centered in Pyrmont, Sydney (Australia).
     map = new google.maps.Map(document.getElementById('map'), {
-        center: { lat: 42.89555 , lng: 31.97508 },
+        center: { lat: -15.958, lng: -5.698 },
         zoom: 7
     });
+
+    map.addListener("click", (event) => {
+        map.setZoom(8);
+        var latitude = event.latLng.lat();
+        var longitude = event.latLng.lng();
+
+        latLng = new google.maps.LatLng(latitude, longitude);
+        marker.setMap(null);
+        marker = new google.maps.Marker({
+            position: latLng,
+            title:"Hello World!"
+        });
+        marker.setMap(map);
+        map.setCenter(marker.position);
+      });
 
     request = {
         location: map.getCenter(),
         radius: '500',
         query: 'Chad'
     }
+
     service = new google.maps.places.PlacesService(map);
     service.textSearch(request, callback);
 
@@ -46,11 +63,15 @@ function setMarker(results){
 }
 
 function setMarkerLocation() {
-    marker.setMap(map);
+    marker.setPosition(marker.place.location);
 }
 
 function newSetMarkerLocation(){
     marker.setMap(null);
+}
+
+function setMarkerByClick(locObj){
+    marker.setMap(locObj);
 }
 
 function setMapLocation() {
