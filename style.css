@@ -12,21 +12,20 @@
 #map {
     height: 90%;
     /* The height is 400 pixels */
-    width: 100%;
+    width: 80%;
     /* The width is the width of the web page */
     margin-left: auto;
     margin-right: auto;
 }
-
 #searchField {
-    height: 10%;
-    width: 50%;
-    margin-left: auto;
-    margin-right: auto;
+    height: 3%;
+    width: 10%;
 }
 
 #searchButton {
     color: green;
-    height: 10%;
-    width: 40%;
+    height: 3%;
+    width: 5%;
+    margin-left: auto;
+    margin-right: auto;
 }

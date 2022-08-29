@@ -17,7 +17,7 @@ const model = {
         mapPinLatitude: 0,
     },
     navigationState: {
-        currentPage: 'mapPage',
+        currentPage:'mapPage'
     },
     //},
     //Input
@@ -52,47 +52,53 @@ const model = {
     //Data / Database
 
     users: [{
-            id: 1,
-            username: "person1",
-            password: 'abc',
-            userInfo: {
-                seenTick: false,
-                bitten: false,
-                sick: false,
-                //TODO: peoples history will remain anonymous, there will be a function in controller that just loops over every history
-                history: [0, 1]
-            },
+        id: 1,
+        username: "person1",
+        password: 'abc',
+        userInfo: {
+            seenTick: false,
+            bitten: false,
+            sick: false,
+            //TODO: peoples history will remain anonymous, there will be a function in controller that just loops over every history
+            history: [0, 1]
         },
+    },
 
-        {
-            id: 2,
-            username: "person2",
-            password: '123',
-            userInfo: {
-                seenTick: true,
-                bitten: true,
-                sick: false,
-                //TODO: peoples history will remain anonymous, there will be a function in controller that just loops over every history
-                history: [2]
-            },
+    {
+        id: 2,
+        username: "person2",
+        password: '123',
+        userInfo: {
+            seenTick: true,
+            bitten: true,
+            sick: false,
+            //TODO: peoples history will remain anonymous, there will be a function in controller that just loops over every history
+            history: [2]
         },
+    },
     ],
 
     cases: [{
-            date: "22.08.22",
-            duration: 0,
-            symtoms: 'Ble syk',
-        },
-        {
-            date: "12.05.22",
-            duration: 0,
-            symtoms: 'Kløe, feber',
-        },
-        {
-            date: "01.01.22",
-            duration: 0,
-            symtoms: 'Smerter i heile kroppen',
-        },
+        date: "22.08.22",
+        duration: 0,
+        symtoms: 'Ble syk',
+        lat: 59.142590,
+        lng: 10.187550
+    },
+    {
+        date: "12.05.22",
+        duration: 0,
+        symtoms: 'Kløe, feber',
+        lat: 59.146196,
+        lng: 10.186502
+    },
+    {
+        date: "01.01.22",
+        duration: 0,
+        symtoms: 'Smerter i heile kroppen',
+        lat: 59.146196,
+        lng: 10.186502
+    },
     ],
 
     /*         pages: {

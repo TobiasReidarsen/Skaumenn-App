@@ -4,13 +4,14 @@ let map = null;
 let request = null;
 let service = null;
 let marker = null;
+let markers = [];
 let latLng = null;
 
 function initMap() {
     // Create a map centered in Pyrmont, Sydney (Australia).
     map = new google.maps.Map(document.getElementById('map'), {
-        center: { lat: -15.958, lng: -5.698 },
-        zoom: 7
+        center: { lat: 59.0585, lng: 10.0194 },
+        zoom: 9
     });
 
     map.addListener("click", (event) => {
@@ -22,16 +23,17 @@ function initMap() {
         marker.setMap(null);
         marker = new google.maps.Marker({
             position: latLng,
-            title:"Hello World!"
+            title: "Hello World!"
         });
         marker.setMap(map);
         map.setCenter(marker.position);
-      });
+        confirmPin(marker);
+    });
 
     request = {
         location: map.getCenter(),
         radius: '500',
-        query: 'Chad'
+        query: 'Herre'
     }
 
     service = new google.maps.places.PlacesService(map);
@@ -49,8 +51,8 @@ function callback(results, status) {
     }
 }
 
-function setMarker(results){
-    if(results != null){
+function setMarker(results) {
+    if (results != null) {
         marker = new google.maps.Marker({
             map: map,
             place: {
@@ -66,11 +68,11 @@ function setMarkerLocation() {
     marker.setPosition(marker.place.location);
 }
 
-function newSetMarkerLocation(){
+function newSetMarkerLocation() {
     marker.setMap(null);
 }
 
-function setMarkerByClick(locObj){
+function setMarkerByClick(locObj) {
     marker.setMap(locObj);
 }
 
@@ -78,7 +80,7 @@ function setMapLocation() {
     map.setCenter(marker.place.location);
 }
 
-function clearMarkers(){
+function clearMarkers() {
     newSetMarkerLocation();
 }
 
@@ -91,8 +93,12 @@ function setRequest(locationParam, radiusParam, queryParam) {
 }
 
 function placeSearch() {
+
     clearMarkers();
     service.textSearch(request, callback);
+    // if (n == 0) {
+    initMap();
+    // }
 }
 
 function updatePin() {
@@ -101,4 +107,31 @@ function updatePin() {
 
 function updatePinRadius() {
 
+}
+
+// asks if the user wants to place a skaumenn pin
+function confirmPin(marker) {
+    let plaserPinValg = confirm('Vil du plasere en pin her?');
+    if (plaserPinValg) {
+        markers.push(marker);
+        let sickAsk = confirm('Ble du syk?');
+
+        if (sickAsk) {
+            let sykdom = prompt('Beskriv syktomen her: ');
+            model.input.userInput.describedSymtoms = sykdom;
+            console.log(model.input.userInput.describedSymtoms);
+        }
+
+        displayMarkers();
+        initMap();
+    }
+}
+
+function displayMarkers(){
+    for (let i = 0; i < markers.length; i++){
+        new google.maps.Marker({
+            position: markers[i].position.latLng,
+            map,
+        })
+    }
 }

@@ -5,17 +5,19 @@
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 
     <link rel="stylesheet" type="text/css" href="style.css" />
-    <script src = "JS/userModel.js"></script>
-        
+    <script src="JS/userModel.js"></script>
+
 
     <script src="JS/googleMaps.js"></script>
     <!-- <script src="forGoogleMaps.js"></script> -->
     <script src="JS/mapView.js"></script>
+    <script src="JS/infoview.js"></script>
 
 </head>
 
 <body>
     <!--The div element for the map -->
+    <div id="pinConfirm"></div>
     <div id="map"></div>
     <div id="app"></div>
     <!-- 
@@ -24,7 +26,9 @@
      and consistent behavior across browsers, consider loading using Promises
      with https://www.npmjs.com/package/@googlemaps/js-api-loader.
     -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=&libraries=places&callback=initMap&v=weekly" defer></script>    
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=&libraries=places&callback=initMap&v=weekly"
+        defer></script>
 </body>
 
 </html>
