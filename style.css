@@ -1,3 +1,8 @@
+body { margin: 0; 
+    padding: 0;
+    padding-top: 3%;
+    background-color: rgb(43, 43, 43);
+ }
 #pac-input {
     background-color: #fff;
     font-family: Roboto;
@@ -8,24 +13,32 @@
     text-overflow: ellipsis;
     width: 400px;
 }
-
+.container{
+    max-width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+}
 #map {
     height: 90%;
     /* The height is 400 pixels */
-    width: 80%;
+    width: 100%;
     /* The width is the width of the web page */
-    margin-left: auto;
-    margin-right: auto;
+    
 }
 #searchField {
     height: 3%;
     width: 10%;
+    position: fixed;
+    top: 7%;
+    right: 45%;
+    z-index: 10;
 }
-
 #searchButton {
     color: green;
-    height: 3%;
-    width: 5%;
-    margin-left: auto;
-    margin-right: auto;
+    height: 2.5%;
+    width: 4%;
+    position: fixed;
+    top: 10%;
+    right: 48%;
+    z-index: 10;
 }

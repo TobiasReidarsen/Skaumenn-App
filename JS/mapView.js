@@ -9,6 +9,8 @@ function view() {
         <input id="searchField" type="text" onchange="model.mapState.currentSearch = this.value" style = "font-size: 20;" value = ''/>
         <button id="searchButton" onclick="searchFunc()" style = "font-size: 20;">Søk</button>
         <button id = "infoside" onclick = "infoView()">Infoside</button>
+        <button id = "flott" onclick = "plaserPin(this.id)">Skaumenn</button>
+        <button id = "sykdom" onclick = "plaserPin(this.id)">Sykdom</button>
     `;
   app.innerHTML = html;
 
@@ -50,4 +52,14 @@ function searchFunc() {
 
   }
   view();
+}
+
+function plaserPin(id) {
+  alert("Trykk på kartet for å plasere en pin");
+
+  if (id == "flott") {
+    model.mapState.flott = true;
+    return;
+  } 
+  model.mapState.sykdom = true;
 }

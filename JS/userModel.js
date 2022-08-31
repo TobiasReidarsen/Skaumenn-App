@@ -15,6 +15,8 @@ const model = {
         mapPin: false,
         mapPinLongitude: 0,
         mapPinLatitude: 0,
+        sykdom: false,
+        flott: false,
     },
     navigationState: {
         currentPage:'mapPage'

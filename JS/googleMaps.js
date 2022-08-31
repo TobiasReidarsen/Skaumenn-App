@@ -4,7 +4,9 @@ let map = null;
 let request = null;
 let service = null;
 let marker = null;
+let orignialPosition = null;
 let markers = [];
+let markersWithinRadius = [];
 let latLng = null;
 
 function initMap() {
@@ -33,7 +35,7 @@ function initMap() {
     request = {
         location: map.getCenter(),
         radius: '500',
-        query: 'Herre'
+        query: 'larvik'
     }
 
     service = new google.maps.places.PlacesService(map);
@@ -109,29 +111,55 @@ function updatePinRadius() {
 
 }
 
-// asks if the user wants to place a skaumenn pin
-function confirmPin(marker) {
-    let plaserPinValg = confirm('Vil du plasere en pin her?');
-    if (plaserPinValg) {
-        markers.push(marker);
-        let sickAsk = confirm('Ble du syk?');
+function calculateDistance(lat1, lon1, lat2, lon2) {
+    var R = 6371; // km
+    var dLat = toRad(lat2-lat1);
+    var dLon = toRad(lon2-lon1);
+    var lat1 = toRad(lat1);
+    var lat2 = toRad(lat2);
 
-        if (sickAsk) {
-            let sykdom = prompt('Beskriv syktomen her: ');
-            model.input.userInput.describedSymtoms = sykdom;
-            console.log(model.input.userInput.describedSymtoms);
+    var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+      Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(lat1) * Math.cos(lat2); 
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+    var d = R * c;
+    return d;
+}
+
+// Converts numeric degrees to radians
+function toRad(Value) 
+{
+    return Value * Math.PI / 180;
+}
+
+function checkIfMarkerisWithinDistance(){
+    for(let m in markers){
+        let distance = calculateDistance(orignialPosition.lat, m.lat, orignialPosition.lng, m.lng);
+        if(distance <= 100){
+            markersWithinRadius.push(m);
         }
-
-        displayMarkers();
-        initMap();
     }
 }
 
-function displayMarkers(){
-    for (let i = 0; i < markers.length; i++){
-        new google.maps.Marker({
-            position: markers[i].position.latLng,
-            map,
-        })
+// asks if the user wants to place a skaumenn pin
+function confirmPin(marker) {
+
+    if (model.mapState.sykdom || model.mapState.flott) {
+
+        if (model.mapState.sykdom) {
+            let sykdom = prompt('Beskriv syktomen her: ');
+            
+            model.input.userInput.describedSymtoms = sykdom;
+            console.log(model.input.userInput.describedSymtoms);
+        }
+        markers.push(marker);
+        displayMarkers();
+        return;
+    }
+    return;
+}
+
+function displayMarkers() {
+    for (let i = 0; i < markers.length; i++) {
+        markers[i].setMap(map);
     }
 }
