@@ -33,6 +33,11 @@ const model = {
             registerButton: false
         },
 
+        tempLogInnput:{
+            brukernavn: '',
+            passord: '',
+        },
+
         //TODO: Maybe should be in state instead
         userInput: {
             seenTickButton: false,

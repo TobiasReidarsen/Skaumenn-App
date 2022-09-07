@@ -3,25 +3,32 @@
 <head>
     <title>Add Map</title>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-
     <link rel="stylesheet" type="text/css" href="style.css" />
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.9.3/firebase-app.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.9.3/firebase-firestore.js"></script>
     <script src="JS/userModel.js"></script>
-
-
     <script src="JS/googleMaps.js"></script>
+    <script src="JS/Controllers/superController.js"></script> <!--nr 1-->
+    <script src="JS/Controllers/loginController.js"></script>
+    <script src="JS/Controllers/mapController.js"></script>
+    <script src="JS/Controllers/infoController.js"></script>
+    <script src="JS/Controllers/registerController.js"></script>
+
     <!-- <script src="forGoogleMaps.js"></script> -->
-    <script src="JS/mapView.js"></script>
-    <script src="JS/infoview.js"></script>
+    <script src="JS/Views/loginView.js"></script>
+    <script src="JS/Views//mapView.js"></script>
+    <script src="JS//Views/infoview.js"></script>
+    <script src="JS//Views/registerview.js"></script>
 
 </head>
 
 <body>
     <!--The div element for the map -->
     <div class="container">
-    <div id="pinConfirm"></div>
-    <div id="map"></div>
-    <div id="app"></div>
-</div>
+        <div id="pinConfirm"></div>
+        <div id="map"></div>
+        <div id="app"></div>
+    </div>
     <!-- 
      The `defer` attribute causes the callback to execute after the full HTML
      document has been parsed. For non-blocking uses, avoiding race conditions,
@@ -29,8 +36,34 @@
      with https://www.npmjs.com/package/@googlemaps/js-api-loader.
     -->
     <script
-        src="https://maps.googleapis.com/maps/api/js?key=&libraries=places&callback=initMap&v=weekly"
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAL45ax9Bxh7zZenXMq6YMdxQ5JDHdgyGY&libraries=places&callback=initMap&v=weekly"
         defer></script>
-</body>
 
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.1.2/firebase-app.js';
+        import { getFirestore, doc, getDoc, setDoc, collection, addDoc, updateDoc, deleteDoc, deleteField } from 'https://www.gstatic.com/firebasejs/9.1.2/firebase-firestore.js';
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDJ4vWW6TvhYkuUJ2-AsWW86WWcmuvAXOc",
+            authDomain: "skaumann-1a4c3.firebaseapp.com",
+            projectId: "skaumann-1a4c3",
+            storageBucket: "skaumann-1a4c3.appspot.com",
+            messagingSenderId: "327357552338",
+            appId: "1:327357552338:web:c47119cbf5e8e87711ff0b"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+
+        const db = getFirestore();
+
+
+        function view() {
+  if(model.navigationState.currentPage = 'mapPage') mapView();
+  if(model.navigationState.currentPage = 'infoPage')infoView();
+
+}   
+    </script>
+</body>
 </html>

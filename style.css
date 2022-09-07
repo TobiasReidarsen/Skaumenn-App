@@ -34,11 +34,15 @@ body { margin: 0;
     z-index: 10;
 }
 #searchButton {
-    color: green;
+    color: black;
     height: 2.5%;
     width: 4%;
     position: fixed;
     top: 10%;
     right: 48%;
-    z-index: 10;
+   /* z-index: 1;*/
+}
+p {
+    color: grey;
+    max-width: 40%;
 }
