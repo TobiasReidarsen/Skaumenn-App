@@ -9,6 +9,7 @@ let orignialPosition = null;  //STATE
 let markers = [];             // DATA
 let markersWithinRadius = []; // DATA
 let latLng = null;            // DATA
+let firebaseLatLngList = [];
 
 //initFirebase();
 function initFirebase() {

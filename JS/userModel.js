@@ -26,16 +26,14 @@ const model = {
     input: {
         //TODO: maybe add in email too
         loginInput: {
-            userName: 'Person1',
-            passWord: 'abc',
             continueButton: false,
             loginButton: false,
             registerButton: false
         },
 
         tempLogInnput:{
-            brukernavn: '',
-            passord: '',
+            brukernavn: 'feil',
+            passord: 'feil',
         },
 
         //TODO: Maybe should be in state instead
@@ -60,8 +58,8 @@ const model = {
 
     users: [{
         id: 1,
-        username: "person1",
-        password: 'abc',
+        username: "noe",
+        password: '123456',
         userInfo: {
             seenTick: false,
             bitten: false,

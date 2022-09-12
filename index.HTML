@@ -8,8 +8,9 @@
     <script type="module" src="https://www.gstatic.com/firebasejs/9.9.3/firebase-firestore.js"></script>
     <script src="JS/userModel.js"></script>
     <script src="JS/googleMaps.js"></script>
-    <script src="JS/Controllers/superController.js"></script> <!--nr 1-->
-    <script src="JS/Controllers/loginController.js"></script>
+    <script src="JS/Controllers/superController.js"></script>
+    <!--nr 1-->
+    <script type="module" src="JS/Controllers/loginController.js"></script>
     <script src="JS/Controllers/mapController.js"></script>
     <script src="JS/Controllers/infoController.js"></script>
     <script src="JS/Controllers/registerController.js"></script>
@@ -39,31 +40,12 @@
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAL45ax9Bxh7zZenXMq6YMdxQ5JDHdgyGY&libraries=places&callback=initMap&v=weekly"
         defer></script>
 
-    <script type="module">
-        import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.1.2/firebase-app.js';
-        import { getFirestore, doc, getDoc, setDoc, collection, addDoc, updateDoc, deleteDoc, deleteField } from 'https://www.gstatic.com/firebasejs/9.1.2/firebase-firestore.js';
-
-        // Your web app's Firebase configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyDJ4vWW6TvhYkuUJ2-AsWW86WWcmuvAXOc",
-            authDomain: "skaumann-1a4c3.firebaseapp.com",
-            projectId: "skaumann-1a4c3",
-            storageBucket: "skaumann-1a4c3.appspot.com",
-            messagingSenderId: "327357552338",
-            appId: "1:327357552338:web:c47119cbf5e8e87711ff0b"
-        };
-
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-
-        const db = getFirestore();
-
-
-        function view() {
-  if(model.navigationState.currentPage = 'mapPage') mapView();
-  if(model.navigationState.currentPage = 'infoPage')infoView();
-
-}   
+    <script>
+        function logdb(){
+            window.readUsersObj('noe', '123456');
+        }
+        
     </script>
 </body>
+
 </html>

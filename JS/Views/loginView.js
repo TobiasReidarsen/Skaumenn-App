@@ -10,7 +10,8 @@ function loginView() {
     <br>
     <input type="text" placeholder="Passord" onchange ="model.input.tempLogInnput.passord = this.value"/>
     <br>
-    <button onclick="logInn()">Logg inn</button>
+    <!-- Function logInn() will call upon function readUsersObj with temp username and temp passord as parameters-->
+    <button onclick="logInn()">Logg inn</button> 
     <button onclick="registrer()">Lag bruker</button>
     <button onclick="backToMap()">Tilbake</button>
     `;
