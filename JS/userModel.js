@@ -83,28 +83,7 @@ const model = {
     },
     ],
 
-    cases: [{
-        date: "22.08.22",
-        duration: 0,
-        symtoms: 'Ble syk',
-        lat: 59.142590,
-        lng: 10.187550
-    },
-    {
-        date: "12.05.22",
-        duration: 0,
-        symtoms: 'Kløe, feber',
-        lat: 59.146196,
-        lng: 10.186502
-    },
-    {
-        date: "01.01.22",
-        duration: 0,
-        symtoms: 'Smerter i heile kroppen',
-        lat: 59.146196,
-        lng: 10.186502
-    },
-    ],
+    cases: [],
 
     /*         pages: {
                 loginPage: {

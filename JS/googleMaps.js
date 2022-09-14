@@ -9,10 +9,13 @@ let orignialPosition = null;  //STATE
 let markers = [];             // DATA
 let markersWithinRadius = []; // DATA
 let latLng = null;            // DATA
-let firebaseLatLngList = [];
+let firebaseLatLngList = []; // la den inn i loginController.js
+let mapCenter = null;
+let antennasCircle = null;
 
 //initFirebase();
 function initFirebase() {
+    
     // https://firebase.google.com/docs/web/setup#available-libraries
 
     // Your web app's Firebase configuration
@@ -44,6 +47,8 @@ function readUserFirestore() {
     });
 }
 
+
+
 function writeUserFirestore(userObj) {
     // userObj {username: 'dreag', passord:'raegad', også videre}
     firestore.collection('users').set(userObj);
@@ -58,9 +63,7 @@ function deleteUserFirestore() {
 
 }
 
-function readCasesFirestore() {
 
-}
 
 function writeCasesFirestore() {
 
@@ -73,18 +76,23 @@ function updateCasesFirestore() {
 function deleteCasesFirestore() {
 
 }
-
+// updateFireBaseLatLngList();
 function initMap() {
+    
     // Create a map centered in Pyrmont, Sydney (Australia).
     map = new google.maps.Map(document.getElementById('map'), {
         center: { lat: 59.0585, lng: 10.0194 },
         zoom: 9
     });
 
+    //firebaseLatLngList.push({ lat: 59.192040, lng: 10.228240});
+
     map.addListener("click", (event) => {
         map.setZoom(8);
-        var latitude = event.latLng.lat();
-        var longitude = event.latLng.lng();
+        let latitude = event.latLng.lat();
+        let longitude = event.latLng.lng();
+
+        mapCenter = { lat: latitude, lng: longitude };
 
         latLng = new google.maps.LatLng(latitude, longitude);
         marker.setMap(null);
@@ -95,6 +103,8 @@ function initMap() {
         //marker.setMap(map);
         map.setCenter(marker.position);
         confirmPin(marker);
+        comparePinLocation();
+        createCircle();
     });
 
     request = {
@@ -177,11 +187,31 @@ function updatePinRadius() {
 }
 
 function comparePinLocation() {
-
+    for (let i = 0; i < firebaseLatLngList.length; i++) {
+        let pinLat = firebaseLatLngList[i].lat;
+        let pinLng = firebaseLatLngList[i].lng;
+        console.log(lat);
+        if (calculateDistance(pinLat, pinLng, mapCenter.lat, mapCenter.lng) <= 10) {
+            displayMarkersFromFirebase(pinLat, pinLng);
+        }
+    }
 }
 
 function createCircle() {
-
+    if (antennasCircle != null) {
+        antennasCircle.setMap(null);
+    }
+    antennasCircle = new google.maps.Circle({
+        strokeColor: "#FF0000",
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        fillColor: "#FF0000",
+        fillOpacity: 0.35,
+        map: map,
+        center: mapCenter,
+        radius: 1000 * 10
+    });
+    map.fitBounds(antennasCircle.getBounds());
 }
 
 //Calculate distance between 2 points, or two latlng in km
@@ -226,15 +256,27 @@ function confirmPin(marker) {
             model.mapState.sykdom = false;
         }
         markers.push(marker);
+        writeCasesFirestore();
         displayMarkers();
         return;
     }
 
 }
-
-
+let stringMarker = [];
 function displayMarkers() {
     for (let i = 0; i < markers.length; i++) {
         markers[i].setMap(map);
+
     }
+
+}
+
+function displayMarkersFromFirebase(pinLatParam, pinLngParam) {
+    let pinlatLng = new google.maps.LatLng(latitude, longitude);
+    let pinmarker = new google.maps.Marker({
+        position: latLng,
+        title: "Hello World!"
+    });
+
+
 }
