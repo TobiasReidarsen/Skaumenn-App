@@ -72,6 +72,3 @@ function writeCasesFirestore() {
 }
 
 window.readUsersObj = readUsersObj;
-
-
-

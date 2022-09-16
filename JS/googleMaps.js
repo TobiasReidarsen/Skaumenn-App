@@ -9,7 +9,7 @@ let orignialPosition = null;  //STATE
 let markers = [];             // DATA
 let markersWithinRadius = []; // DATA
 let latLng = null;            // DATA
-let firebaseLatLngList = []; // la den inn i loginController.js
+let firebaseLatLngList = []; // la pusher info fra databasen inn i den fra loginncontroller.
 let mapCenter = null;
 let antennasCircle = null;
 
