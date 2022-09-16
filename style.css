@@ -40,30 +40,60 @@ body { margin: 0;
     position: fixed;
     top: 10%;
     right: 48%;
-   /* z-index: 1;*/
 }
-/* Button used to open the contact form - fixed at the bottom of the page */
+/* Button that opens all the stuff */
 .open-button {
   border-radius: 50%;
   color: white;
-  padding: 16px 20px;
   border: none;
   cursor: pointer;
   opacity: 0.8;
   position: fixed;
   top: 10%;
   right: 20%;
+  height: 50px;
+  width: 50px;
+}
+.info-button{
+  border-radius: 50%;
+  position: fixed;
+  top: 10%;
+  left: 21%;
+  height: 50px;
+  width: 50px;
+}
+.tick-button{
+  border-radius: 50%;
+  position: fixed;
+  bottom: 15%;
+  left: 35%;
+  height: 50px;
+  width: 50px;
+}
+.sick-button{
+  border-radius: 50%;
+  position: fixed;
+  bottom: 15%;
+  left: 50%;
+  height: 50px;
+  width: 50px;
+}
+.login-button{
+  border-radius: 50%;
+  position: fixed;
+  bottom: 15%;
+  left: 65%;
+  height: 50px;
   width: 50px;
 }
 
+
 /* The popup form - hidden by default */
 .form-popup {
-  
   display: none;
   position: fixed;
   bottom: 0;
   right: 15px;
-  z-index: 9;
 }
 
 /* Add styles to the form container */
