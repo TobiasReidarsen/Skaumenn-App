@@ -1,16 +1,55 @@
-<!DOCTYPE html>
-<html lang="en">
+<!-- <!DOCTYPE html> -->
+<html lang="eng">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Skaumenn Spy</title>
-    <style></style>
+    <title>Add Map</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.9.3/firebase-app.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.9.3/firebase-firestore.js"></script>
     <script src="JS/userModel.js"></script>
-    <script src="JS/mapView.js"></script>
-    <!-- ditta er ein kommentar-->
+    <script src="JS/googleMaps.js"></script>
+    <script type="module" src="JS/Controllers/loginController.js"></script>
+    <script src="JS/Controllers/superController.js"></script>
+    <!--nr 1-->
+    <script src="JS/Controllers/mapController.js"></script>
+    <script src="JS/Controllers/infoController.js"></script>
+    <script src="JS/Controllers/registerController.js"></script>
+
+    <!-- <script src="forGoogleMaps.js"></script> -->
+    <script src="JS/Views/loginView.js"></script>
+    <script src="JS/Views//mapView.js"></script>
+    <script src="JS//Views/infoview.js"></script>
+    <script src="JS//Views/registerview.js"></script>
+
 </head>
+
 <body>
-    <div id="app"></div>
+    <!--The div element for the map -->
+    <div class="container">
+        <div id="pinConfirm"></div>
+        <div id="map"></div>
+        <div id="app"></div>
+    </div>
+    <!-- 
+     The `defer` attribute causes the callback to execute after the full HTML
+     document has been parsed. For non-blocking uses, avoiding race conditions,
+     and consistent behavior across browsers, consider loading using Promises
+     with https://www.npmjs.com/package/@googlemaps/js-api-loader.
+    -->
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAL45ax9Bxh7zZenXMq6YMdxQ5JDHdgyGY&libraries=places&callback=initMap&v=weekly"
+        defer></script>
+
+    <script>
+        function logdb(){
+            window.readUsersObj('noe', '123456');
+        }
+        
+    </script>
 </body>
+
 </html>
