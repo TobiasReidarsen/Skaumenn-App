@@ -44,13 +44,9 @@ body { margin: 0;
 /* Button that opens all the stuff */
 .open-button {
   border-radius: 50%;
-  color: white;
-  border: none;
-  cursor: pointer;
-  opacity: 0.8;
   position: fixed;
   top: 10%;
-  right: 20%;
+  right: 21%;
   height: 50px;
   width: 50px;
 }
