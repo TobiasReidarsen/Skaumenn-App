@@ -15,7 +15,7 @@ let antennasCircle = null;
 
 //initFirebase();
 function initFirebase() {
-    
+
     // https://firebase.google.com/docs/web/setup#available-libraries
 
     // Your web app's Firebase configuration
@@ -78,7 +78,7 @@ function deleteCasesFirestore() {
 }
 // updateFireBaseLatLngList();
 function initMap() {
-    
+
     // Create a map centered in Pyrmont, Sydney (Australia).
     map = new google.maps.Map(document.getElementById('map'), {
         center: { lat: 59.0585, lng: 10.0194 },
@@ -103,8 +103,9 @@ function initMap() {
         //marker.setMap(map);
         map.setCenter(marker.position);
         confirmPin();
-        comparePinLocation();
+        //comparePinLocation();
         createCircle();
+        checkIfMarkerisWithinDistance();
     });
 
     request = {
@@ -115,6 +116,15 @@ function initMap() {
 
     service = new google.maps.places.PlacesService(map);
     service.textSearch(request, callback);
+
+    map.addListener('zoom_changed', () => {
+        // let zoom = map.zoom;
+        // console.log(zoom + "Her er zoom");
+        // if (zoom > 10) {
+        //displayMarkers();
+        // }
+        // console.log(map.zoom + "zoom");
+    });
 
 }
 // Checks that the PlacesServiceStatus is OK, and adds a marker
@@ -190,7 +200,7 @@ function comparePinLocation() {
     for (let i = 0; i < firebaseLatLngList.length; i++) {
         let pinLat = firebaseLatLngList[i].lat;
         let pinLng = firebaseLatLngList[i].lng;
-        console.log(pinLat);
+        // console.log(pinLat);
         if (calculateDistance(pinLat, pinLng, mapCenter.lat, mapCenter.lng) <= 10) {
             displayMarkersFromFirebase(pinLat, pinLng);
         }
@@ -235,12 +245,23 @@ function toRad(Value) {
 }
 
 function checkIfMarkerisWithinDistance() {
-    for (let m in markers) {
-        let distance = calculateDistance(orignialPosition.lat, m.lat, orignialPosition.lng, m.lng);
-        if (distance <= 100) {
-            markersWithinRadius.push(m);
+    hideMarkers();
+    
+    markers.map((mark) => {
+        let distance = calculateDistance(mapCenter.lat, mapCenter.lng, mark.position.lat(), mark.position.lng());
+        if (distance <= 10) {
+            markersWithinRadius.push(mark);
         }
+    });
+    displayNearbyMarkers();
+}
+
+function hideMarkers(){
+    for (let i = 0; i < markersWithinRadius.length; i++) {
+        markersWithinRadius[i].setMap(null);
     }
+
+    markersWithinRadius = [];
 }
 
 // asks if the user wants to place a skaumenn pin
@@ -262,21 +283,35 @@ function confirmPin() {
     }
 
 }
-// let stringMarker = [];
-function displayMarkers() {
-    for (let i = 0; i < markers.length; i++) {
-        markers[i].setMap(map);
 
+function displayMarkers() {
+    let zoom = map.getZoom();
+    if (zoom > 10) {
+        for (let i = 0; i < markers.length; i++) {
+            markers[i].setMap(map);
+
+        }
+    } else {
+        // hideMarkers();
     }
 
 }
 
+function displayNearbyMarkers() {
+    for (let i = 0; i < markersWithinRadius.length; i++) {
+        markersWithinRadius[i].setMap(map);
+
+    }
+}
+
 function displayMarkersFromFirebase(pinLatParam, pinLngParam) {
-    let pinlatLng = new google.maps.LatLng(latitude, longitude);
-    let pinmarker = new google.maps.Marker({
-        position: latLng,
-        title: "Hello World!"
-    });
+    if (map.zoom > 10) {
+        let pinlatLng = new google.maps.LatLng(latitude, longitude);
+        let pinmarker = new google.maps.Marker({
+            position: latLng,
+            title: "Hello World!"
+        });
+    }
 
 
 }

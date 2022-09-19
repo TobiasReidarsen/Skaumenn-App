@@ -1,8 +1,8 @@
 
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.1.2/firebase-app.js';
-import { getFirestore, doc, getDocs, getDoc, setDoc, collection, addDoc, updateDoc, deleteDoc, deleteField, GeoPoint, FieldValue } from 'https://www.gstatic.com/firebasejs/9.1.2/firebase-firestore.js';
+import { getFirestore, doc, getDocs, getDoc, setDoc, collection, addDoc, updateDoc, deleteDoc, deleteField, GeoPoint, arrayUnion } from 'https://www.gstatic.com/firebasejs/9.1.2/firebase-firestore.js';
 
-let userID = null;
+let userID = 'AmTKFWJHAtzLyyOUauIu';
 let fireBaseCases = null;
 // let firebaseLatLngList = [];
 //let firebaseLatLngList = [];
@@ -27,16 +27,13 @@ const casesRef = collection(db, 'cases');
 
 getDocs(casesRef).then((casesList) => {
     casesList.forEach((doc) => {
-        console.log(doc.id, " => ", doc.data());
         fireBaseCases = doc.data();
         // firebaseLatLngList.push(fireBaseCases.place);
         model.cases.push(fireBaseCases);
-        console.log(model.cases.at(-1));
     
     });
 
-updateFireBaseLatLngList();
-    displayMarkers();
+    updateFireBaseLatLngList();
 })
 .catch((error) => {
     console.log(error);
@@ -61,16 +58,13 @@ function updateFireBaseLatLngList() {
     for (let i = 0; i < model.cases.length; i++) {
         firebaseLatLngList.push({ lat: model.cases[i].place._lat, lng: model.cases[i].place._long });
         const storedMarker = new google.maps.Marker({
-            position: { lat: firebaseLatLngList[i].lat, lng: firebaseLatLngList[i].lng }, 
-            map
+            position: { lat: firebaseLatLngList[i].lat, lng: firebaseLatLngList[i].lng }
         });
         markers.push(storedMarker);
-        console.log(firebaseLatLngList[0]);
         
     }
 }
 
-console.log(fireBaseCases.place);
 
 function writeCasesFirestore(markerParam) {
     addDoc(casesRef, {
@@ -79,13 +73,13 @@ function writeCasesFirestore(markerParam) {
         place: new GeoPoint(markerParam.position.lat(), markerParam.position.lng()),
         symtoms: "something"
     }).then((documentObj) => {
-        documentObj.id
+        referenceCaseToUser(documentObj.id);
     });
 }
 
-function referenceCaseToUser(){
-    updateDoc(userID, {
-        cases: FieldValue.arrayUnion()
+function referenceCaseToUser(docID){
+    updateDoc(doc(db, "users", userID), {
+        cases: arrayUnion(doc(db, "cases", docID))
     });
 }
 
