@@ -1,7 +1,8 @@
 
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.1.2/firebase-app.js';
-import { getFirestore, doc, getDocs, getDoc, setDoc, collection, addDoc, updateDoc, deleteDoc, deleteField, GeoPoint } from 'https://www.gstatic.com/firebasejs/9.1.2/firebase-firestore.js';
+import { getFirestore, doc, getDocs, getDoc, setDoc, collection, addDoc, updateDoc, deleteDoc, deleteField, GeoPoint, FieldValue } from 'https://www.gstatic.com/firebasejs/9.1.2/firebase-firestore.js';
 
+let userID = null;
 let fireBaseCases = null;
 // let firebaseLatLngList = [];
 //let firebaseLatLngList = [];
@@ -56,15 +57,6 @@ var readUsersObj = function (username, password) {
     });
 }
 
-// allCasesList.forEach((doc) => {
-//     console.log(doc.id, " => ", doc.data());
-//     fireBaseCases = doc.data();
-//     // firebaseLatLngList.push(fireBaseCases.place);
-//     model.cases.push(fireBaseCases);
-//     console.log(model.cases.at(-1));
-
-// });
-
 function updateFireBaseLatLngList() {
     for (let i = 0; i < model.cases.length; i++) {
         firebaseLatLngList.push({ lat: model.cases[i].place._lat, lng: model.cases[i].place._long });
@@ -75,20 +67,25 @@ function updateFireBaseLatLngList() {
         markers.push(storedMarker);
         console.log(firebaseLatLngList[0]);
         
-        // return;
     }
 }
 
 console.log(fireBaseCases.place);
 
 function writeCasesFirestore(markerParam) {
-    // let lat = marker.position.lat();
-    // console.log(lat);
     addDoc(casesRef, {
         date: new Date(),
         duration: 3,
         place: new GeoPoint(markerParam.position.lat(), markerParam.position.lng()),
         symtoms: "something"
+    }).then((documentObj) => {
+        documentObj.id
+    });
+}
+
+function referenceCaseToUser(){
+    updateDoc(userID, {
+        cases: FieldValue.arrayUnion()
     });
 }
 
