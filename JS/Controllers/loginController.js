@@ -1,6 +1,6 @@
 
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.1.2/firebase-app.js';
-import { getFirestore, doc, getDocs, getDoc, setDoc, collection, addDoc, updateDoc, deleteDoc, deleteField } from 'https://www.gstatic.com/firebasejs/9.1.2/firebase-firestore.js';
+import { getFirestore, doc, getDocs, getDoc, setDoc, collection, addDoc, updateDoc, deleteDoc, deleteField, GeoPoint } from 'https://www.gstatic.com/firebasejs/9.1.2/firebase-firestore.js';
 
 let fireBaseCases = null;
 // let firebaseLatLngList = [];
@@ -24,7 +24,22 @@ const usersRef = collection(db, 'users');
 
 const casesRef = collection(db, 'cases');
 
-const allCasesList = await getDocs(casesRef);
+getDocs(casesRef).then((casesList) => {
+    casesList.forEach((doc) => {
+        console.log(doc.id, " => ", doc.data());
+        fireBaseCases = doc.data();
+        // firebaseLatLngList.push(fireBaseCases.place);
+        model.cases.push(fireBaseCases);
+        console.log(model.cases.at(-1));
+    
+    });
+
+updateFireBaseLatLngList();
+    displayMarkers();
+})
+.catch((error) => {
+    console.log(error);
+});
 
 const allUsersList = await getDocs(usersRef);
 allUsersList.forEach((doc) => {
@@ -41,14 +56,14 @@ var readUsersObj = function (username, password) {
     });
 }
 
-allCasesList.forEach((doc) => {
-    console.log(doc.id, " => ", doc.data());
-    fireBaseCases = doc.data();
-    // firebaseLatLngList.push(fireBaseCases.place);
-    model.cases.push(fireBaseCases);
-    console.log(model.cases.at(-1));
+// allCasesList.forEach((doc) => {
+//     console.log(doc.id, " => ", doc.data());
+//     fireBaseCases = doc.data();
+//     // firebaseLatLngList.push(fireBaseCases.place);
+//     model.cases.push(fireBaseCases);
+//     console.log(model.cases.at(-1));
 
-});
+// });
 
 function updateFireBaseLatLngList() {
     for (let i = 0; i < model.cases.length; i++) {
@@ -66,9 +81,16 @@ function updateFireBaseLatLngList() {
 
 console.log(fireBaseCases.place);
 
-function writeCasesFirestore() {
-    let name = model.cases.length;
-    setDoc(doc(db, "cases",))
+function writeCasesFirestore(markerParam) {
+    // let lat = marker.position.lat();
+    // console.log(lat);
+    addDoc(casesRef, {
+        date: new Date(),
+        duration: 3,
+        place: new GeoPoint(markerParam.position.lat(), markerParam.position.lng()),
+        symtoms: "something"
+    });
 }
 
 window.readUsersObj = readUsersObj;
+window.writeCasesFirestore = writeCasesFirestore;

@@ -102,7 +102,7 @@ function initMap() {
         });
         //marker.setMap(map);
         map.setCenter(marker.position);
-        confirmPin(marker);
+        confirmPin();
         comparePinLocation();
         createCircle();
     });
@@ -190,7 +190,7 @@ function comparePinLocation() {
     for (let i = 0; i < firebaseLatLngList.length; i++) {
         let pinLat = firebaseLatLngList[i].lat;
         let pinLng = firebaseLatLngList[i].lng;
-        console.log(lat);
+        console.log(pinLat);
         if (calculateDistance(pinLat, pinLng, mapCenter.lat, mapCenter.lng) <= 10) {
             displayMarkersFromFirebase(pinLat, pinLng);
         }
@@ -244,7 +244,7 @@ function checkIfMarkerisWithinDistance() {
 }
 
 // asks if the user wants to place a skaumenn pin
-function confirmPin(marker) {
+function confirmPin() {
 
     if (model.mapState.sykdom || model.mapState.flott) {
 
@@ -256,13 +256,13 @@ function confirmPin(marker) {
             model.mapState.sykdom = false;
         }
         markers.push(marker);
-        writeCasesFirestore();
+        window.writeCasesFirestore(marker);
         displayMarkers();
         return;
     }
 
 }
-let stringMarker = [];
+// let stringMarker = [];
 function displayMarkers() {
     for (let i = 0; i < markers.length; i++) {
         markers[i].setMap(map);
