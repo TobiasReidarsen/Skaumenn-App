@@ -4,8 +4,6 @@ import { getFirestore, doc, getDocs, getDoc, setDoc, collection, addDoc, updateD
 
 let userID = 'AmTKFWJHAtzLyyOUauIu';
 let fireBaseCases = null;
-// let firebaseLatLngList = [];
-//let firebaseLatLngList = [];
 // Your web app's Firebase configuration
 const firebaseConfig = {
     apiKey: "AIzaSyDJ4vWW6TvhYkuUJ2-AsWW86WWcmuvAXOc",
@@ -28,9 +26,8 @@ const casesRef = collection(db, 'cases');
 getDocs(casesRef).then((casesList) => {
     casesList.forEach((doc) => {
         fireBaseCases = doc.data();
-        // firebaseLatLngList.push(fireBaseCases.place);
+        
         model.cases.push(fireBaseCases);
-    
     });
 
     updateFireBaseLatLngList();
@@ -56,9 +53,8 @@ var readUsersObj = function (username, password) {
 
 function updateFireBaseLatLngList() {
     for (let i = 0; i < model.cases.length; i++) {
-        firebaseLatLngList.push({ lat: model.cases[i].place._lat, lng: model.cases[i].place._long });
         const storedMarker = new google.maps.Marker({
-            position: { lat: firebaseLatLngList[i].lat, lng: firebaseLatLngList[i].lng }
+            position: { lat: model.cases[i].place._lat, lng: model.cases[i].place._long }
         });
         markers.push(storedMarker);
         
