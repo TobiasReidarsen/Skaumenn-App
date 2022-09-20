@@ -68,21 +68,25 @@ function initMap() {
     });
 
     map.addListener("click", (event) => {
-        map.setZoom(8);
-        let latitude = event.latLng.lat();
-        let longitude = event.latLng.lng();
+        if ((model.mapState.sykdom == true) || (model.mapState.flott == true)) {
+            //map.setZoom(8);
+            let latitude = event.latLng.lat();
+            let longitude = event.latLng.lng();
 
-        mapCenter = { lat: latitude, lng: longitude };
+            const latLngObj = new google.maps.LatLng(latitude, longitude);
+            marker = new google.maps.Marker({
+                position: latLngObj,
+                map
+            });
 
-        latLng = new google.maps.LatLng(latitude, longitude);
-        marker.setMap(null);
-        marker = new google.maps.Marker({
-            position: latLng,
-            title: "Hello World!"
-        });
-        //marker.setMap(map);
-        map.setCenter(marker.position);
-        confirmPin();
+
+            mapCenter = { lat: latitude, lng: longitude };
+
+            orignialPosition = new google.maps.LatLng(latitude, longitude);
+            //marker.setMap(map);
+            map.setCenter(orignialPosition);
+            confirmPin();
+        }
         //comparePinLocation();
         createCircle();
         checkIfMarkerisWithinDistance();
@@ -91,7 +95,7 @@ function initMap() {
     request = {
         location: map.getCenter(),
         radius: '500',
-        query: 'larvik'
+        query: 'sandefjord'
     }
 
     service = new google.maps.places.PlacesService(map);
@@ -104,6 +108,7 @@ function initMap() {
         //displayMarkers();
         // }
         // console.log(map.zoom + "zoom");
+        return;
     });
 
 }
@@ -111,36 +116,11 @@ function initMap() {
 // using the place ID and location from the PlacesService.
 function callback(results, status) {
 
-
+    console.log(results);
     if (status == google.maps.places.PlacesServiceStatus.OK) {
-        setMarker(results);
-        setMarkerLocation();
+        let latLngObj = new google.maps.LatLng(results[0].geometry.location.lat(), results[0].geometry.location.lng());
+        map.setCenter(latLngObj);
     }
-}
-
-function setMarker(results) {
-    if (results != null) {
-        marker = new google.maps.Marker({
-            map: map,
-            place: {
-                placeId: results[0].place_id,
-                location: results[0].geometry.location
-            }
-        });
-    }
-    setMapLocation();
-}
-
-function setMarkerLocation() {
-    marker.setPosition(marker.place.location);
-}
-
-function newSetMarkerLocation() {
-    marker.setMap(null);
-}
-
-function setMarkerByClick(locObj) {
-    marker.setMap(locObj);
 }
 
 function setMapLocation() {
@@ -148,7 +128,7 @@ function setMapLocation() {
 }
 
 function clearMarkers() {
-    newSetMarkerLocation();
+    marker.setMap(null);
 }
 
 function setRequest(locationParam, radiusParam, queryParam) {
@@ -161,7 +141,7 @@ function setRequest(locationParam, radiusParam, queryParam) {
 
 function placeSearch() {
 
-    clearMarkers();
+    //clearMarkers();
     service.textSearch(request, callback);
 }
 
@@ -215,7 +195,7 @@ function toRad(Value) {
 
 function checkIfMarkerisWithinDistance() {
     hideMarkers();
-    
+
     markers.map((mark) => {
         let distance = calculateDistance(mapCenter.lat, mapCenter.lng, mark.position.lat(), mark.position.lng());
         if (distance <= 10) {
@@ -225,7 +205,7 @@ function checkIfMarkerisWithinDistance() {
     displayNearbyMarkers();
 }
 
-function hideMarkers(){
+function hideMarkers() {
     for (let i = 0; i < markersWithinRadius.length; i++) {
         markersWithinRadius[i].setMap(null);
     }
@@ -255,10 +235,10 @@ function confirmPin() {
 
 function displayMarkers() {
     let zoom = map.getZoom();
-        for (let i = 0; i < markers.length; i++) {
-            markers[i].setMap(map);
+    for (let i = 0; i < markers.length; i++) {
+        markers[i].setMap(map);
 
-        }
+    }
 }
 
 function displayNearbyMarkers() {
