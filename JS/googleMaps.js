@@ -9,7 +9,7 @@ let orignialPosition = null;  //STATE
 let markers = [];             // DATA
 let markersWithinRadius = []; // DATA
 let latLng = null;            // DATA
-let firebaseLatLngList = []; // la pusher info fra databasen inn i den fra loginncontroller.
+let firebaseLatLngList = [];  // la pusher info fra databasen inn i den fra loginncontroller.
 let mapCenter = null;
 let antennasCircle = null;
 
@@ -59,24 +59,6 @@ function updateUserFirestore(userObj, userID) {
     firestore.collection('users').doc(userID).update(userObj);
 }
 
-function deleteUserFirestore() {
-
-}
-
-
-
-function writeCasesFirestore() {
-
-}
-
-function updateCasesFirestore() {
-
-}
-
-function deleteCasesFirestore() {
-
-}
-// updateFireBaseLatLngList();
 function initMap() {
 
     // Create a map centered in Pyrmont, Sydney (Australia).
@@ -84,8 +66,6 @@ function initMap() {
         center: { lat: 59.0585, lng: 10.0194 },
         zoom: 9
     });
-
-    //firebaseLatLngList.push({ lat: 59.192040, lng: 10.228240});
 
     map.addListener("click", (event) => {
         map.setZoom(8);
@@ -183,23 +163,12 @@ function placeSearch() {
 
     clearMarkers();
     service.textSearch(request, callback);
-    // if (n == 0) {
-    initMap();
-    // }
-}
-
-function updatePin() {
-
-}
-
-function updatePinRadius() {
-
 }
 
 function comparePinLocation() {
-    for (let i = 0; i < firebaseLatLngList.length; i++) {
-        let pinLat = firebaseLatLngList[i].lat;
-        let pinLng = firebaseLatLngList[i].lng;
+    for (let i = 0; i < markers.length; i++) {
+        let pinLat = markers.position.lat();
+        let pinLng = markers.position.lng();
         // console.log(pinLat);
         if (calculateDistance(pinLat, pinLng, mapCenter.lat, mapCenter.lng) <= 10) {
             displayMarkersFromFirebase(pinLat, pinLng);
@@ -286,15 +255,10 @@ function confirmPin() {
 
 function displayMarkers() {
     let zoom = map.getZoom();
-    if (zoom > 10) {
         for (let i = 0; i < markers.length; i++) {
             markers[i].setMap(map);
 
         }
-    } else {
-        // hideMarkers();
-    }
-
 }
 
 function displayNearbyMarkers() {
