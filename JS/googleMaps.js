@@ -214,15 +214,16 @@ function hideMarkers() {
 }
 
 // asks if the user wants to place a skaumenn pin
+// Plaserer pinnen hvis endten sykdom eller flott har blitt trykket på
 function confirmPin() {
 
     if (model.mapState.sykdom || model.mapState.flott) {
 
         if (model.mapState.sykdom) {
-            let sykdom = prompt('Beskriv syktomen her: ');
+            // let sykdom = prompt('Beskriv syktomen her: ');
 
-            model.input.userInput.describedSymtoms = sykdom;
-            console.log(model.input.userInput.describedSymtoms);
+            
+
             model.mapState.sykdom = false;
         }
         markers.push(marker);
