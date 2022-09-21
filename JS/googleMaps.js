@@ -141,7 +141,6 @@ function setRequest(locationParam, radiusParam, queryParam) {
 
 function placeSearch() {
 
-    //clearMarkers();
     service.textSearch(request, callback);
 }
 
