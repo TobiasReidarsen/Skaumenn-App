@@ -30,7 +30,6 @@ function searchFunc() {
     } else {
       searchFunc();
     }
-
   }
   view();
 }
@@ -56,10 +55,7 @@ function registerSick(){
   let selectBox = document.getElementById("sickness");
   let selectedValue = selectBox.options[selectBox.selectedIndex].text;
   model.users[0].userInfo.sickness = selectedValue;
-  console.log(model.users[0].userInfo.sickness);
-
-  
-  
+  console.log(model.users[0].userInfo.sickness);  
 }
 
 function closeSelect(){
@@ -68,9 +64,11 @@ function closeSelect(){
 }
 
 function changeForm() {
+  console.log("kjører");
   let x = document.getElementById('myForm');
   if (x.style.display === "none") {
     x.style.display = "block";
+  } else {
+    x.style.display = "none";
   }
-
 }
