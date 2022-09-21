@@ -9,7 +9,7 @@ function infoView() {
     htmlInfo += /*HTML*/ `
         <h4 style= color:white;>Hva er flått</h4>
         <p style= "color: grey;
-        max-width: 80%;">Skogflått er en midd. Den har åtte bein, og ikke noe tydelig skille mellom hode, bryst og bakkropp. 
+        max-width: 80%; margin-left: auto; margin-right:auto;">Skogflått er en midd. Den har åtte bein, og ikke noe tydelig skille mellom hode, bryst og bakkropp. 
         Alle midd hører til edderkoppdyrene, og er ikke insekter. 
         Edderkoppdyrene har åtte bein i motsetning til insektene som har seks bein. Edderkoppdyrene har heller ingen antenner.
 
@@ -18,12 +18,12 @@ function infoView() {
         Fullsugd av blod kan imidlertid hunnen bli inntil 1,5 cm lang, og bakkroppen får da en gråblå farge.</p>
         <h4 style= color:white;>Slik fjerner du flått:</h4>
         <p style= "color: grey;
-        max-width: 80%;">
+        max-width: 80%; margin-left: auto; margin-right:auto;">
         Bruk fingrene, en pinsett eller en flåttfjerner som du kjøper på apoteket. Ta tak i flåttnymfen helt nede ved huden og dra den rett ut. Voksne flått kan med fordel vris litt samtidig som de trekkes ut. Det har liten betydning om deler av flåttens biteredskaper blir sittende igjen i huden.
         Du kan gjerne legge på litt desinfiserende sårsalve på bittstedet.</p>
         <h4 style= color:white;>Sykdommer som man kan få fra flåttbitt</h4>
         <p style= "color: grey;
-        max-width: 80%;">Skogflåttencefalitt(TBE)</br>
+        max-width: 80%; margin-left: auto; margin-right:auto;">Skogflåttencefalitt(TBE)</br>
         Lyme borreliose</br>
         Anaplasmose</br>
         Babesiose</br>

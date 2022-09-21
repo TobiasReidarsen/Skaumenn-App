@@ -12,7 +12,7 @@ function view() {
     html += /*HTML*/ `
     
 
-  <div class="form-popup" id="myForm">
+  <div class="form-popup" id="myForm" >
     <input id="searchField" type="text" onchange="model.mapState.currentSearch = this.value" style = "font-size: 20;" value = ''/>
     <button id="searchButton" onclick="searchFunc()" style = "font-size: 20;">Søk</button>
   </form>
@@ -28,8 +28,8 @@ function view() {
         <input  id="loggInn"type="image" src="./img/log-inn.png" class ="login-button"  onclick = loginView()>
         <!--button id= "loggInn" onclick = loginView()>Logg inn</button-->
 
-        <div id ="sickDropDown" class = "dropdown-content"style="display: none;"> 
-        <select id="sickness" name="sickness" onchange="registerSick()">
+        <div id ="sickDropDown" class = "dropdown-content"style="display: none; "> 
+        <select id="sickness" name="sickness" onchange="registerSick()" style="font-size:20px">
         <option>Skogflåttencefalitt(TBE)</option>
         <option>Lyme borreliose</option>
         <option>Anaplasmose</option>
@@ -37,7 +37,7 @@ function view() {
         <option>Harepest</option>
         <option>Annet</option>
         </select><br>
-        <button id="closThisThing" onclick ="closeSelect()">register</button></div>
+        <button id="closThisThing" onclick ="closeSelect()" style="font-size:20px; ">register</button></div>
     `; 
   }
   app.innerHTML = html;
