@@ -2,6 +2,8 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.1.2/firebase-app.js';
 import { getFirestore, doc, getDocs, getDoc, setDoc, collection, addDoc, updateDoc, deleteDoc, deleteField, GeoPoint, arrayUnion } from 'https://www.gstatic.com/firebasejs/9.1.2/firebase-firestore.js';
 
+let fireStoreUsage = false;
+
 let userID = 'AmTKFWJHAtzLyyOUauIu';
 let fireBaseCases = null;
 // Your web app's Firebase configuration
@@ -23,32 +25,43 @@ const usersRef = collection(db, 'users');
 
 const casesRef = collection(db, 'cases');
 
-getDocs(casesRef).then((casesList) => {
-    casesList.forEach((doc) => {
-        fireBaseCases = doc.data();
-        
-        model.cases.push(fireBaseCases);
-    });
+let getAllCases = function () {
+    getDocs(casesRef).then((casesList) => {
+        casesList.forEach((doc) => {
+            fireBaseCases = doc.data();
 
-    updateFireBaseLatLngList();
-})
-.catch((error) => {
-    console.log(error);
-});
+            model.cases.push(fireBaseCases);
+        });
 
-const allUsersList = await getDocs(usersRef);
-allUsersList.forEach((doc) => {
-    // doc.data() is never undefined for query doc snapshots
-    console.log(doc.id, " => ", doc.data());
-});
+        updateFireBaseLatLngList();
+    })
+        .catch((error) => {
+            console.log(error);
+        });
+}
+
+let getAllUsers = function () {
+    if (fireStoreUsage) {
+        getDocs(usersRef).then((usersList) => {
+            let usersListObj = usersList.data();
+            usersListObj.map((userObj) => {
+                console.log(user.id, " => ", user.data());
+            });
+        });
+    }
+}
+
+
 
 var readUsersObj = function (username, password) {
-    allUsersList.forEach((doc) => {
-        let data = doc.data();
-        if (data.username == username && data.password == password) {
-            console.log('du er logget inn');
-        }
-    });
+    if (fireStoreUsage) {
+        allUsersList.forEach((doc) => {
+            let data = doc.data();
+            if (data.username == username && data.password == password) {
+                console.log('du er logget inn');
+            }
+        });
+    }
 }
 
 function updateFireBaseLatLngList() {
@@ -57,7 +70,7 @@ function updateFireBaseLatLngList() {
             position: { lat: model.cases[i].place._lat, lng: model.cases[i].place._long }
         });
         markers.push(storedMarker);
-        
+
     }
 }
 
@@ -73,11 +86,15 @@ function writeCasesFirestore(markerParam) {
     });
 }
 
-function referenceCaseToUser(docID){
+function referenceCaseToUser(docID) {
     updateDoc(doc(db, "users", userID), {
         cases: arrayUnion(doc(db, "cases", docID))
     });
 }
 
+window.fireStoreUsage = fireStoreUsage;
 window.readUsersObj = readUsersObj;
 window.writeCasesFirestore = writeCasesFirestore;
+window.getAllUsers = getAllUsers;
+window.getAllCases = getAllCases;
+//window.startFirebase = startFirebase;
