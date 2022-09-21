@@ -103,8 +103,10 @@ p {
     max-width: 40%;
 }
 .dropdown-content{
-  z-index: 10;
+  background-color: rgba(43, 43, 43, 0.3);
   position: fixed;
-  top: 50%;
-  left: 50%;
+  text-align: center;
+  justify-content: center;
+  top: 40%;
+  left: 40%;
 }

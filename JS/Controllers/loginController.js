@@ -25,23 +25,26 @@ const usersRef = collection(db, 'users');
 
 const casesRef = collection(db, 'cases');
 
-let getAllCases = function () {
-    getDocs(casesRef).then((casesList) => {
-        casesList.forEach((doc) => {
-            fireBaseCases = doc.data();
-
-            model.cases.push(fireBaseCases);
-        });
-
-        updateFireBaseLatLngList();
-    })
-        .catch((error) => {
-            console.log(error);
-        });
-}
-
-let getAllUsers = function () {
+let getAllCases = function () { // # TODO: remobe this function later.
+    console.log("cases");
     if (fireStoreUsage) {
+        getDocs(casesRef).then((casesList) => {
+            casesList.forEach((doc) => {
+                fireBaseCases = doc.data();
+
+                model.cases.push(fireBaseCases);
+            });
+
+            updateFireBaseLatLngList();
+        })
+            .catch((error) => {
+                console.log(error);
+            });
+    }
+
+    console.log("getallUsers false");
+    if (fireStoreUsage) {
+        console.log("getallUsers true");
         getDocs(usersRef).then((usersList) => {
             let usersListObj = usersList.data();
             usersListObj.map((userObj) => {
@@ -49,11 +52,10 @@ let getAllUsers = function () {
             });
         });
     }
-}
 
 
 
-var readUsersObj = function (username, password) {
+    console.log(`userObj`);
     if (fireStoreUsage) {
         allUsersList.forEach((doc) => {
             let data = doc.data();
@@ -62,6 +64,12 @@ var readUsersObj = function (username, password) {
             }
         });
     }
+}
+
+function startFirebase() {
+    fireStoreUsage = true;
+    getAllCases();
+
 }
 
 function updateFireBaseLatLngList() {
@@ -93,8 +101,8 @@ function referenceCaseToUser(docID) {
 }
 
 window.fireStoreUsage = fireStoreUsage;
-window.readUsersObj = readUsersObj;
+// window.readUsersObj = readUsersObj;
 window.writeCasesFirestore = writeCasesFirestore;
-window.getAllUsers = getAllUsers;
-window.getAllCases = getAllCases;
-//window.startFirebase = startFirebase;
+// window.getAllUsers = getAllUsers;
+// window.getAllCases = getAllCases;
+window.startFirebase = startFirebase;
