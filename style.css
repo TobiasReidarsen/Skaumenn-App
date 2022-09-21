@@ -1,6 +1,5 @@
 body { margin: 0; 
     padding: 0;
-    padding-top: 3%;
     background-color: rgb(43, 43, 43);
  }
 #pac-input {
@@ -14,15 +13,17 @@ body { margin: 0;
     width: 400px;
 }
 .container{
-    max-width: 60%;
+    max-width: 100%;
     margin-left: auto;
     margin-right: auto;
 }
 #map {
-    height: 90%;
+    height: 100%;
     /* The height is 400 pixels */
     width: 100%;
     /* The width is the width of the web page */
+    margin-left: auto;
+    margin-right: auto;
    
     
 }
@@ -44,41 +45,47 @@ body { margin: 0;
 /* Button that opens all the stuff */
 .open-button {
   border-radius: 50%;
+  border: 5px solid black;
   position: fixed;
   top: 10%;
-  right: 21%;
+  right: 3%;
   height: 50px;
   width: 50px;
 }
 .info-button{
   border-radius: 50%;
+  background-color: white;
+  border: 5px solid black;
   position: fixed;
   top: 10%;
-  left: 21%;
+  left: 3%;
   height: 50px;
   width: 50px;
 }
 .tick-button{
   border-radius: 50%;
+  border: 5px solid black;
   position: fixed;
-  bottom: 15%;
-  left: 35%;
+  bottom: 10%;
+  left:35%;
   height: 50px;
   width: 50px;
 }
 .sick-button{
   border-radius: 50%;
+  border: 5px solid black;
   position: fixed;
-  bottom: 15%;
-  left: 50%;
+  bottom: 10%;
+  left: 45%;
   height: 50px;
   width: 50px;
 }
 .login-button{
   border-radius: 50%;
+  border: 5px solid black;
   position: fixed;
-  bottom: 15%;
-  left: 65%;
+  bottom: 10%;
+  left: 55%;
   height: 50px;
   width: 50px;
 }
@@ -103,10 +110,82 @@ p {
     max-width: 40%;
 }
 .dropdown-content{
-  background-color: rgba(43, 43, 43, 0.3);
+  
+  border: 100px outset rgba(43, 43, 43, 0.3);
   position: fixed;
+  margin-left: auto;
+  margin-right: auto;
   text-align: center;
   justify-content: center;
-  top: 40%;
+  top: 35%;
+  left: 35%;
+}
+@media only screen and (max-width: 600px) {
+  body {
+    margin: 0; 
+    padding: 0;
+    background-color: rgb(43, 43, 43);
+  }
+  #map {
+    height: 100%;
+    /* The height is 400 pixels */
+    width: 100%;
+    /* The width is the width of the web page */
+}
+.container{
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.open-button {
+  border-radius: 50%;
+  position: fixed;
+  top: 10%;
+  right: 5%;
+  height: 50px;
+  width: 50px;
+}
+.info-button{
+  border-radius: 50%;
+  position: fixed;
+  top: 10%;
+  left: 5%;
+  height: 50px;
+  width: 50px;
+}
+.tick-button{
+  border-radius: 50%;
+  position: fixed;
+  bottom: 5%;
+  left: 15%;
+  height: 50px;
+  width: 50px;
+}
+.sick-button{
+  border-radius: 50%;
+  position: fixed;
+  bottom: 5%;
   left: 40%;
+  height: 50px;
+  width: 50px;
+}
+.login-button{
+  border-radius: 50%;
+  position: fixed;
+  bottom: 5%;
+  left: 65%;
+  height: 50px;
+  width: 50px;
+}
+.dropdown-content{
+  
+  border: 100px outset rgba(43, 43, 43, 0.3);
+  position: fixed;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  justify-content: center;
+  top: 25%;
+  left:0%;
+}
 }
